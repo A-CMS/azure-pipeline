@@ -1,0 +1,23 @@
+variables:
+  - group: GLOBALS
+
+trigger:
+  branches:
+    include: 
+    - master
+
+pr: none
+
+stages:
+  - stage: TerraformVersiona
+    displayName: "Checking my terraform versioon"
+    jobs:
+      - job: plan
+        workspace:
+          clean: all
+        pool:
+          name: $(agent-pool)
+        steps:
+          - script: |
+              terraform --version
+            displayName: 'Terraform terraform version'
